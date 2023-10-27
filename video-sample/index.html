@@ -1,85 +1,68 @@
+<!DOCTYPE html>
+<html>
 <head>
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
-  
-    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-    <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
-    <script >
+  <title>Cloud Video</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
 
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
 
-    </script>
-  </head>
-  
-  <body>
-    <video
-      id="my-video"
-      class="video-js"
-      controls
-      preload="auto"
-      width="640"
-      height="264"
-      data-setup="{}"
-    >
-      <source src="loading.mp4" type="video/mp4" />
+    button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <video id="cloudVideo" autoplay loop>
+    <source id="videoSource" src="nubes.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a
-        web browser that
-        <a href="https://videojs.com/html5-video-support/" target="_blank"
-          >supports HTML5 video</a
-        >
-      </p>
-    </video>
+  <button id="toggleButton" onclick="toggleVideo()">Memory</button>
 
-    <button>hello</button>
-  
-    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+  <script>
+    let clickCount = 0;
+    let isPlayingNubes = true;
 
-  </body>
+    function toggleVideo() {
+      if (isPlayingNubes) {
+        clickCount++;
+        if (clickCount >= 6) {
+          replaceVideo("2clueclouds.mp4");
+          isPlayingNubes = false;
+        }
+      }
 
-  <footer>
-    <script>
-        var player = document.getElementById('my-video');
+      toggleButtonLabel(isPlayingNubes);
+    }
 
-      
-  // initialize serial port
-document.querySelector('button').addEventListener('click', async () => {
-  console.log('hello');
-  // Prompt user to select any serial port.
-  const port = await na.vigator.serial.requestPort();
+    function replaceVideo(newVideoSrc) {
+      const video = document.getElementById('cloudVideo');
+      const videoSource = document.getElementById('videoSource');
+      videoSource.src = newVideoSrc;
+      video.load();
+      video.play();
+    }
 
-  const ports = await navigator.serial.getPorts();
-
-  await port.open({ baudRate: 9600 });
-
-
-  const reader = port.readable.getReader();
-
-// Listen to data coming from the serial device.
-while (true) {
-  const { value, done } = await reader.read();
-  if (done) {
-    // Allow the serial port to be closed later.
-    reader.releaseLock();
-    break;
-  }
-  // value is a Uint8Array.
-  var temp_info = value[0];
-  if (temp_info==0){
-    player.play();
-  }
-  else{
-    player.pause();
-  }
-  console.log(value[0]);
-}
-
-
-  
-});
+    function toggleButtonLabel(isPlayingNubes) {
+      const toggleButton = document.getElementById('toggleButton');
+      toggleButton.textContent = isPlayingNubes ? 'Cloud' : 'Memory';
+    }
+  </script>
+</body>
+</html>
 
 
 
-
-
-
-    </script>

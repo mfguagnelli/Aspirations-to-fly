@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Bird Sounds</title>
+</head>
 <body>
-    <p>listen to it</p>
-<audio controls>
-  <source src="horse.ogg" type="audio/ogg">
-  <source src="demonios.mp3" type="audio/mpeg">
-</audio>
+  <button id="bird1Button">Bird 1</button>
+  <button id="bird2Button">Bird 2</button>
+  <button id="bird3Button">Bird 3</button>
 
+  <audio id="bird1Audio" src="1clueaudio1.mp3"></audio>
+  <audio id="bird2Audio" src="1clueaudio2.mp3"></audio>
+  <audio id="bird3Audio" src="1clueaudio3.mp3"></audio>
+
+  <script>
+    // Function to play the audio for Bird 1
+    document.getElementById('bird1Button').addEventListener('click', function() {
+      document.getElementById('bird1Audio').play();
+    });
+
+    // Function to play the audio for Bird 2
+    document.getElementById('bird2Button').addEventListener('click', function() {
+      document.getElementById('bird2Audio').play();
+    });
+
+    // Function to play the audio for Bird 3
+    document.getElementById('bird3Button').addEventListener('click', function() {
+      document.getElementById('bird3Audio').play();
+    });
+  </script>
 </body>
 </html>
-
